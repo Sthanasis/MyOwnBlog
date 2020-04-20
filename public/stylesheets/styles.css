@@ -1,0 +1,63 @@
+:root {
+  --section-rotate: 9vw;
+}
+
+::-moz-selection {
+  background-color: #55a5c5;
+  color: #fff;
+}
+
+::selection {
+  background-color: #55a5c5;
+  color: #fff;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+  box-sizing: inherit;
+  background-color: inherit;
+}
+
+html {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  line-height: 1.6;
+  font-weight: 300;
+  font-family: 'Lato', sans-serif;
+  color: #777;
+  min-height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  padding: 0 2em;
+  position: sticky;
+  justify-content: space-between;
+  background-color: #7bc5e2;
+}
+
+#userButtons-container {
+  display: flex;
+}
+
+#userButtons-container div.navButton {
+  margin: 0 1em;
+}
+
+.navInnerContainer {
+  margin: 0.5em 0;
+}
