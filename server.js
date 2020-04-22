@@ -2,15 +2,12 @@
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./app');
+
 dotenv.config({
   path: './config.env',
 });
 
-// const DB = `mongodb+srv://sakis:${toString(
-//   process.env.DB_PASSWORD
-// )}@cluster0-fzepy.mongodb.net/test?retryWrites=true&w=majority`;
-const DB =
-  'mongodb+srv://sakis:undefined@cluster0-fzepy.mongodb.net/test?retryWrites=true&w=majority';
+const DB = `mongodb+srv://sakis:${process.env.DB_PASSWORD}@cluster0-fzepy.mongodb.net/test?retryWrites=true&w=majority`;
 mongoose
   .connect(DB, {
     useNewUrlParser: true,
