@@ -1,11 +1,11 @@
 //config dotenv before declaring the app
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const app = require('./app');
 
 dotenv.config({
   path: './config.env',
 });
+const app = require('./app');
 
 const DB = `mongodb+srv://sakis:${process.env.DB_PASSWORD}@cluster0-fzepy.mongodb.net/test?retryWrites=true&w=majority`;
 mongoose

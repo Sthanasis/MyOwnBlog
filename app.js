@@ -13,16 +13,6 @@ if (process.env.NODE_ENV === 'development') {
 app.use(express.json());
 // serving static files
 app.use(express.static(`${__dirname}/public`));
-//define my own middleware
-app.use((req, res, next) => {
-  console.log('Hello from the middleware');
-  next();
-});
-
-app.use((req, res, next) => {
-  req.requestTime = new Date().toISOString(); //convert date to readable string
-  next();
-});
 
 app.use('/api/v1/users', userRouter);
 
