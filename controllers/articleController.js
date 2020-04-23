@@ -1,12 +1,12 @@
-const User = require('../Models/userModel');
+const Article = require('../Models/articleModel');
 
-exports.getAllUsers = async (req, res) => {
+exports.getAllArticles = async (req, res) => {
   try {
-    const users = await User.find();
+    const articles = await Article.find();
     res.status(200).json({
       status: 'success',
       data: {
-        users,
+        articles,
       },
     });
   } catch (err) {
@@ -17,13 +17,13 @@ exports.getAllUsers = async (req, res) => {
   }
 };
 
-exports.getUser = async (req, res) => {
+exports.getArticle = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    const article = await Article.findById(req.params.id);
     res.status(200).json({
       status: 'success',
       data: {
-        user,
+        article,
       },
     });
   } catch (err) {
@@ -34,14 +34,14 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
+exports.createArticle = async (req, res) => {
   try {
-    const newUser = await User.create(req.body);
+    const newArticle = await Article.create(req.body);
 
     res.status(201).json({
       status: 'success',
       data: {
-        newUser,
+        newArticle,
       },
     });
   } catch (err) {
@@ -52,16 +52,16 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.updateUser = async (req, res) => {
+exports.updateArticle = async (req, res) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+    const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
       new: true, //send the new obj
       runValidators: true, // validates if new data types are consistent with model's data types
     });
     res.status(200).json({
       status: 'success',
       data: {
-        user,
+        article,
       },
     });
   } catch (err) {
@@ -72,9 +72,9 @@ exports.updateUser = async (req, res) => {
   }
 };
 
-exports.deleteUser = async (req, res) => {
+exports.deleteArticle = async (req, res) => {
   try {
-    await User.findByIdAndDelete(req.params.id);
+    await Article.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: 'success',
