@@ -1,8 +1,10 @@
 const User = require('../Models/userModel');
+const APIFeatures = require('../utilities/apiFeatures');
 
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const features = new APIFeatures(User.find(), req.query).limitFields();
+    const users = await features.query;
     res.status(200).json({
       status: 'success',
       data: {
