@@ -1,28 +1,21 @@
-let id = '';
-const getData = () => {
-  fetch(`http:/api/v1/articles`)
+// get Data form an API
+const getData = (url) => {
+  fetch(url)
     .then((res) => {
       return res.json();
     })
     .then((response) => {
-      console.log(response);
-      document.getElementById('title').innerHTML =
-        response.data.articles[0].title;
-      document.getElementById('content').innerHTML =
-        response.data.articles[0].content;
-      id = response.data.articles[0]._id;
-      console.log(id);
+      return response.data;
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-getData();
-// console.log(id);
-async function postData(url, data) {
+// SEND DATA TO API - method specifies the request (post or patch)
+const sendData = async (url, data, method) => {
   const res = await fetch(url, {
-    method: 'PATCH',
+    method: method,
     mode: 'cors',
     cache: 'no-cache',
     credentials: 'same-origin',
@@ -34,30 +27,4 @@ async function postData(url, data) {
     body: JSON.stringify(data),
   });
   return res.json();
-}
-
-// postData('http://localhost:3000/api/v1/users/5ea499496a41b13a3413e551', {
-//   name: 'Nikolakis',
-// })
-//   .then((data) => {
-//     console.log(data);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-const submitButton = document.getElementById('submit');
-
-submitButton.addEventListener('click', () => {
-  postData(`http:/api/v1/articles/${id}`, {
-    content: document.getElementById('textField').value,
-  })
-    .then((response) => {
-      console.log(response);
-      document.getElementById('content').innerHTML =
-        response.data.article.content;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});
+};
