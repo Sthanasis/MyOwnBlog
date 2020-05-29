@@ -11,8 +11,8 @@ const articleSchema = new mongoose.Schema({
     required: [true, 'An article must have a content'],
   },
   date: {
-    type: Date,
-    default: Date.now(),
+    type: String,
+    default: new Date().toJSON().slice(0, 10).replace(/-/g, '/'),
   },
   author: {
     type: String,
