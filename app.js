@@ -1,21 +1,25 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
-
 const userRouter = require('./routes/userRoutes');
 const articleRouter = require('./routes/articleRoutes');
+const viewRouter = require('./routes/viewRoutes');
+
 const app = express();
 
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+// serving static files
+app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 //express.json middleware
 app.use(express.json());
-// serving static files
-app.use(express.static(`${__dirname}/public`));
-app.get('/home.html', (req, res) => {
-  res.render('home');
-});
+
+app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/articles', articleRouter);
 

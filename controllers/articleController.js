@@ -1,84 +1,55 @@
-const Article = require('../Models/articleModel');
+const Article = require('../models/articleModel');
+const catchAsync = require('../utilities/catchAsync');
 
-exports.getAllArticles = async (req, res) => {
-  try {
-    const articles = await Article.find();
-    res.status(200).json({
-      status: 'success',
-      data: {
-        articles,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.getAllArticles = catchAsync(async (req, res) => {
+  const articles = await Article.find();
+  res.status(200).json({
+    status: 'success',
+    data: {
+      articles,
+    },
+  });
+});
 
-exports.getArticle = async (req, res) => {
-  try {
-    const article = await Article.findById(req.params.id);
-    res.status(200).json({
-      status: 'success',
-      data: {
-        article,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.getArticle = catchAsync(async (req, res) => {
+  const article = await Article.findById(req.params.id);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      article,
+    },
+  });
+});
 
-exports.createArticle = async (req, res) => {
-  try {
-    const newArticle = await Article.create(req.body);
+exports.createArticle = catchAsync(async (req, res) => {
+  const newArticle = await Article.create(req.body);
+  console.log(newArticle);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      newArticle,
+    },
+  });
+});
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        newArticle,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.updateArticle = catchAsync(async (req, res) => {
+  const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
+    new: true, //send the new obj
+    runValidators: true, // validates if new data types are consistent with model's data types
+  });
+  res.status(200).json({
+    status: 'success',
+    data: {
+      article,
+    },
+  });
+});
 
-exports.updateArticle = async (req, res) => {
-  try {
-    const article = await Article.findByIdAndUpdate(req.params.id, req.body, {
-      new: true, //send the new obj
-      runValidators: true, // validates if new data types are consistent with model's data types
-    });
-    res.status(200).json({
-      status: 'success',
-      data: {
-        article,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.deleteArticle = catchAsync(async (req, res) => {
+  await Article.findByIdAndDelete(req.params.id);
 
-exports.deleteArticle = async (req, res) => {
-  try {
-    await Article.findByIdAndDelete(req.params.id);
-
-    res.status(204).json({
-      status: 'success',
-      data: null,
-    });
-  } catch (err) {}
-};
+  res.status(204).json({
+    status: 'success',
+    data: null,
+  });
+});

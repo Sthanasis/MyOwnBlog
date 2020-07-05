@@ -7,7 +7,7 @@ dotenv.config({
 });
 const app = require('./app');
 
-const DB = `mongodb://sakis:${process.env.DB_PASSWORD}@cluster0-shard-00-00-nyjez.gcp.mongodb.net:27017,cluster0-shard-00-01-nyjez.gcp.mongodb.net:27017,cluster0-shard-00-02-nyjez.gcp.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true&w=majority`;
+const DB = `mongodb+srv://sakis:${process.env.DB_PASSWORD}@cluster0-nyjez.gcp.mongodb.net/Cluster0?retryWrites=true&w=majority`;
 
 mongoose
   .connect(DB, {
@@ -15,7 +15,6 @@ mongoose
     useCreateIndex: true,
     useFindAndModify: false,
     useUnifiedTopology: true,
-    dbName: 'test',
   })
   .then(() => {
     console.log('DB connection successful');

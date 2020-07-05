@@ -1,0 +1,18 @@
+extends base
+
+block content
+    main
+        div.flexContainer
+
+            each article in articles
+                div.article
+                    div.articleHeader
+                        //-vale image path 
+                        span=article.title
+                        img(src=`${article.image}`)          
+                    div.articleContent   
+                        span= article.content
+                    div.articleFooter
+                        span= article.author
+                        a.button(href=`/articles/${article.slug}`) Read Full Article
+                        span= article.date
