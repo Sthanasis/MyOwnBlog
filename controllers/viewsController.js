@@ -14,8 +14,14 @@ exports.getHome = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getArticle = (req, res) => {
-  res.status(200).render('article', {
-    title: 'My first Article',
+exports.getArticle = catchAsync(async (req, res, next) => {
+  const article = await Article.findOne({ slug: req.params.slug });
+
+  res.status(200).render('article', { article });
+});
+
+exports.getLoginForm = (req, res) => {
+  res.status(200).render('loginScreen', {
+    title: 'Log into your account',
   });
 };

@@ -17,11 +17,11 @@ main {
 }
 
 nav {
-  background-color: var(--GreenMedium);
+  background-color: var(--GreenDark);
   display: flex;
   justify-content: space-between;
   padding: 0 1em;
-  min-height: 4vh;
+  min-height: 6vh;
   height: fit-content;
   height: -moz-fit-content;
   position: fixed;
@@ -55,10 +55,11 @@ form {
 
 a {
   text-decoration: none;
+  color: var(--Dark);
 }
 
-a:visited {
-  color: inherit;
+a:hover {
+  color: var(--MainText);
 }
 
 h1 {
@@ -125,9 +126,9 @@ button a {
   margin: auto;
 }
 
-.article:first-of-type {
+/* .article:first-of-type {
   margin-top: 10vh;
-}
+} */
 
 .article {
   background-color: var(--GreenMedium);
@@ -135,7 +136,7 @@ button a {
   padding: 1em;
   margin: 2em 0;
   text-align: center;
-
+  color: var(--MainText);
   display: flex;
   flex-direction: column;
   /* width: fit-content;
@@ -147,6 +148,10 @@ button a {
   display: flex;
   justify-content: space-between;
   flex-direction: row-reverse;
+  margin-bottom: 1em;
+  font-weight: bold;
+  font-size: 1.2rem;
+  border-bottom: 1px dotted var(--MainText);
 }
 
 .articleHeader span {
@@ -156,6 +161,8 @@ button a {
 .articleFooter {
   display: flex;
   justify-content: space-between;
+  margin-top: 1em;
+  font-style: italic;
 }
 
 button.edit {
@@ -176,6 +183,18 @@ button.create {
   flex-direction: column;
 }
 
+.button {
+  background: var(--GreenLight);
+  border-radius: 2em;
+  padding: 0 5px;
+  color: var(--GreenDark);
+}
+
+.button:hover {
+  background: var(--GreenDark);
+  color: var(--GreenLight);
+}
+
 .container {
   margin: auto;
   background: var(--GreenMedium);
@@ -192,13 +211,27 @@ button.create {
   padding: 1em;
 }
 
+.hiddenContent {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .flexColumn {
   display: flex;
   flex-direction: column;
 }
 
+.center {
+  text-align: center;
+}
+
+#signContainer a {
+  margin: 0 0.5em;
+}
+
 .container.flexColumn {
-  height: 20vh;
+  height: 30vh;
   width: 20vw;
   justify-content: space-around;
 }

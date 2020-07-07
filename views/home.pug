@@ -8,11 +8,10 @@ block content
                 div.article
                     div.articleHeader
                         //-vale image path 
-                        span=article.title
-                        img(src=`${article.image}`)          
+                        span=article.title          
                     div.articleContent   
-                        span= article.content
+                        div.hiddenContent= article.content
                     div.articleFooter
                         span= article.author
-                        a.button(href=`/articles/${article.slug}`) Read Full Article
+                        a.button(href=`/article/${article.slug}`) Read Full Article
                         span= article.date

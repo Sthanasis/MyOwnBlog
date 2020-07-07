@@ -17,7 +17,10 @@ const userSchema = new mongoose.Schema({
     //Validate if in email format
     validate: [validator.isEmail, 'Please provide a valid email!'],
   },
-  image: String,
+  image: {
+    type: String,
+    default: '../public/img/main_avatar.svg',
+  },
   password: {
     type: String,
     required: [true, 'Please provide a password!'],
