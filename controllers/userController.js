@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const catchAsync = require('../utilities/catchAsync');
 
 exports.getAllUsers = async (req, res) => {
   try {
@@ -35,23 +36,18 @@ exports.getUser = async (req, res) => {
   }
 };
 
-exports.createUser = async (req, res) => {
-  try {
-    const newUser = await User.create(req.body);
+exports.createUser = catchAsync(async (req, res) => {
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        newUser,
-      },
-    });
-  } catch (err) {
-    res.status(400).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+  const newUser = await User.create(req.body);
+
+  res.status(201).json({
+    status: 'success',
+    data: {
+      newUser,
+    },
+  });
+
+});
 
 exports.updateUser = async (req, res) => {
   try {

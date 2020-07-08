@@ -1,0 +1,22 @@
+extends base
+
+block content
+    main#formMain
+        .container
+            div=title
+            .gridContainer
+                .formInput
+                    label Name
+                    input(type="text" id="userName" required)
+                .formInput
+                    label Email
+                    input(type="email" id="userEmail" required)
+                .formInput
+                    label Password
+                    input(type="password" id="password" required)
+                .formInput
+                    label Confirm Password
+                    input(type="password" id="passwordConfirm" required)
+                .formInput
+                    //button.button#userSignUp(onclick="gatherUserData()") Sign Up
+                    input.button#userSignUp(onclick="gatherUserData()" type='submit' )

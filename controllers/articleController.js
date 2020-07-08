@@ -3,6 +3,7 @@ const catchAsync = require('../utilities/catchAsync');
 
 exports.getAllArticles = catchAsync(async (req, res) => {
   const articles = await Article.find();
+  articles.reverse();
   res.status(200).json({
     status: 'success',
     data: {

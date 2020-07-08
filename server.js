@@ -7,7 +7,7 @@ dotenv.config({
 });
 const app = require('./app');
 
-const DB = `mongodb+srv://sakis:${process.env.DB_PASSWORD}@cluster0-nyjez.gcp.mongodb.net/Cluster0?retryWrites=true&w=majority`;
+const DB = `mongodb+srv://sakis:10921092@cluster0-nyjez.gcp.mongodb.net/Cluster0?retryWrites=true&w=majority`;
 
 mongoose
   .connect(DB, {
