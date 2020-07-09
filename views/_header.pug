@@ -6,7 +6,7 @@ header.header
         div#signContainer
             if user
                 div.profileContainer
-                    img.profilePicture(src=`/img/user.svg`)
+                    img.profilePicture(src=`/img/users/${user.image}`)
                     span.username=user.name
                 div
                     a.button(href="#") Create Article
