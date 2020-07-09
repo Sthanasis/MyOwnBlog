@@ -1,6 +1,7 @@
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
 const articleRouter = require('./routes/articleRoutes');
 const viewRouter = require('./routes/viewRoutes');
@@ -18,6 +19,7 @@ if (process.env.NODE_ENV === 'development') {
 }
 //express.json middleware
 app.use(express.json());
+app.use(cookieParser());
 
 app.use('/', viewRouter);
 app.use('/api/v1/users', userRouter);

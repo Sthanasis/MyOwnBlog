@@ -1,16 +1,17 @@
 const express = require('express');
 const articleController = require('../controllers/articleController');
+const authController = require('../controllers/authController');
 
 const router = express.Router();
 
 router
   .route('/')
   .get(articleController.getAllArticles)
-  .post(articleController.createArticle);
+  .post(authController.protect, articleController.createArticle);
 router
   .route('/:id')
   .get(articleController.getArticle)
   .patch(articleController.updateArticle)
-  .delete(articleController.deleteArticle);
+  .delete(authController.protect, articleController.deleteArticle);
 
 module.exports = router;
