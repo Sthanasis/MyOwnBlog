@@ -1,0 +1,11 @@
+extends base
+
+block content
+    main
+     .container.widthFitContent
+        div.articleHeader=title
+        div(style="margin-bottom:2em;")
+            input(type="text" class="title" placeholder="Title" style="width: -webkit-fill-available;")
+        div
+            textarea#articleContent(name="" cols="50" rows="30" placeholder="Your Article")
+        button#create.button Post Article 

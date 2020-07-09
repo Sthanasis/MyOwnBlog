@@ -9,8 +9,8 @@ header.header
                     img.profilePicture(src=`/img/users/${user.image}`)
                     span.username=user.name
                 div
-                    a.button(href="#") Create Article
-                    a.button(href="#") Logout
+                    a#createArticle.button(href="/createNewArticle") Create Article
+                    a#logout.button(href="#") Logout
             else
                 a.button(href="/login") Log In
                 a.button(href="/signup") Sign Up

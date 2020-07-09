@@ -4,9 +4,10 @@ const authController = require('../controllers/authController');
 
 const router = express.Router();
 
-router.use(authController.isLoggedIn)
+router.use(authController.isLoggedIn);
 
 router.get('/', viewsController.getHome);
+router.get('/createNewArticle', viewsController.createArticle);
 router.get('/article/:slug', viewsController.getArticle);
 router.get('/login', viewsController.getLoginForm);
 router.get('/signup', viewsController.getSignupForm);

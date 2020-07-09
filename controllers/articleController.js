@@ -1,4 +1,5 @@
 const Article = require('../models/articleModel');
+const User = require('../models/userModel');
 const catchAsync = require('../utilities/catchAsync');
 
 exports.getAllArticles = catchAsync(async (req, res) => {
@@ -23,8 +24,13 @@ exports.getArticle = catchAsync(async (req, res) => {
 });
 
 exports.createArticle = catchAsync(async (req, res) => {
-  const newArticle = await Article.create(req.body);
-  console.log(newArticle);
+  const user = await User.findOne(req.params.name);
+  const newArticle = await Article.create({
+    title: req.body.title,
+    content: req.body.content,
+    //author: user.name,
+  });
+  console.log(user);
   res.status(201).json({
     status: 'success',
     data: {

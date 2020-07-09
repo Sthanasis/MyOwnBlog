@@ -5,33 +5,34 @@ const AppError = require('../utilities/appError');
 const catchAsync = require('../utilities/catchAsync');
 
 const signToken = (id) => {
-  return jwt.sign({ id }, "thisIsMyUltraSecureSecretItsAlsoLong", {
-    expiresIn: "90d",
+  return jwt.sign({ id }, 'thisIsMyUltraSecureSecretItsAlsoLong', {
+    expiresIn: process.env.JWT_EXPIRES_IN,
   });
 };
 
-
-const createSendToken = (user,statusCode, res)=>{
+const createSendToken = (user, statusCode, res) => {
   const token = signToken(user._id);
   const cookieOptions = {
     // 90 has to go to config.env as JWT_COOKIE_EXPIRES_IN
-    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
-    httpOnly: true
-  }
-  if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
-  
-  res.cookie('jwt', token, cookieOptions )
+    expires: new Date(
+      Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+    ),
+    httpOnly: true,
+  };
+  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+  res.cookie('jwt', token, cookieOptions);
 
   user.password = undefined;
 
   res.status(statusCode).json({
-    status:"success",
+    status: 'success',
     token,
-    data:{
-      user
-    }
-  })
-}
+    data: {
+      user,
+    },
+  });
+};
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
@@ -41,7 +42,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  createSendToken(newUser, 201, res)
+  createSendToken(newUser, 201, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -61,7 +62,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   //3) if everything ok send the token to the client
-  createSendToken(user,201,res)
+  createSendToken(user, 201, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -82,7 +83,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
   //2) validate token
-  const decoded = await promisify(jwt.verify)(token, "thisIsMyUltraSecureSecretItsAlsoLong");
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   //3) check if user still exists
   const currentUser = User.findById(decoded.id);
 
@@ -95,20 +96,34 @@ exports.protect = catchAsync(async (req, res, next) => {
   next();
 });
 
-exports.isLoggedIn = catchAsync(async (req, res, next) => {
+exports.isLoggedIn = async (req, res, next) => {
   if (req.cookies.jwt) {
-    
-    const decoded = await promisify(jwt.verify)(req.cookies.jwt, "thisIsMyUltraSecureSecretItsAlsoLong");
-    const currentUser = await User.findById(decoded.id);
-    console.log(currentUser)
-    if (!currentUser) {
+    try {
+      const decoded = await promisify(jwt.verify)(
+        req.cookies.jwt,
+        process.env.JWT_SECRET
+      );
+      const currentUser = await User.findById(decoded.id);
+
+      if (!currentUser) {
+        return next();
+      }
+
+      res.locals.user = currentUser;
+
+      return next();
+    } catch (err) {
       return next();
     }
-
-    res.locals.user = currentUser;
-
-    return next();
   }
 
   next();
-});
+};
+
+exports.logout = (req, res) => {
+  res.cookie('jwt', 'loggedout', {
+    expires: new Date(Date.now() + 10 * 1000),
+    httpOnly: true,
+  });
+  res.status(200).json({ status: 'success' });
+};

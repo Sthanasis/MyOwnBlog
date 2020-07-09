@@ -1,5 +1,5 @@
 const Article = require('../models/articleModel');
-const User = require('../models/userModel')
+const User = require('../models/userModel');
 const catchAsync = require('../utilities/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
@@ -34,8 +34,14 @@ exports.getSignupForm = (req, res) => {
   });
 };
 
+exports.createArticle = (req, res) => {
+  res.status(200).render('createNewArticle', {
+    title: 'Share your thoughts',
+  });
+};
+
 exports.postSignupForm = catchAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body)
+  const newUser = await User.create(req.body);
   res.status(201).json({
     status: 'success',
     data: {

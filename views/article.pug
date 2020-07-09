@@ -13,5 +13,7 @@ block content
                         span=article.author
                         span -
                         span=article.date
-                    
                     a.button(href="/") Go Back
+                    if user
+                        if user.name === article.author
+                            a.button(href="/") Delete Article
