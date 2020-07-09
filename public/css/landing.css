@@ -63,7 +63,7 @@ a {
 }
 
 a:hover {
-  color: var(--MainText);
+  color: var(--GreenMD);
 }
 
 h1 {
@@ -90,9 +90,9 @@ input[type='email'] {
 }
 
 input[type='submit'] {
-  border-radius: 2em;
   width: fit-content;
-  background: var(--Light);
+  background: var(--MainText);
+  color: var(--GreenMD);
   font-weight: bold;
   grid-column: 2;
   margin: 0 0 0 auto;
@@ -160,6 +160,7 @@ button a {
 
 .articleHeader span {
   margin: auto;
+  white-space: break-spaces;
 }
 
 .articleFooter {
@@ -192,7 +193,8 @@ button.create {
 }
 #formMain {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
+  min-height: 75vh;
 }
 
 .button {
@@ -244,6 +246,18 @@ button.create {
   margin: 0 0.5em;
 }
 
+
+#messageContainer{
+  border-radius: 5px;
+  text-align: center;
+  width: fit-content;
+  width: -moz-fit-content;
+  display: flex;
+  margin: 1em auto;
+  padding: 1em;
+  color: var(--MainText)
+}
+
 .container.flexColumn {
   height: 30vh;
   width: 20vw;
@@ -266,6 +280,7 @@ button.create {
   color:var(--MainText);
   font-weight: bold;
   margin: auto 1em;
+  text-transform: capitalize;
 }
 
 .profilePicture{

@@ -4,7 +4,7 @@ block content
     main#formMain
         .container
             div=title
-            .gridContainer
+            form.gridContainer
                 .formInput
                     label Name
                     input(type="text" id="userName" required)
@@ -18,5 +18,4 @@ block content
                     label Confirm Password
                     input(type="password" id="passwordConfirm" required)
                 .formInput
-                    //button.button#userSignUp(onclick="gatherUserData()") Sign Up
-                    input.button#userSignUp(onclick="gatherUserData()" type='submit' )
+                    input.button#userSignUp(type='submit')

@@ -11,7 +11,7 @@ const app = express();
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-// serving static files
+// serving static files from public folder
 app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares
 if (process.env.NODE_ENV === 'development') {

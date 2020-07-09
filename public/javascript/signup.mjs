@@ -1,5 +1,6 @@
-const singUpBtn = document.getElementById('userSignUp');
+import {createMessage} from './message.mjs'
 
+const singUp = document.querySelector('form.gridContainer');
 
 const gatherUserData = () => {
   let name = document.getElementById('userName').value;
@@ -16,34 +17,24 @@ const gatherUserData = () => {
   
   if(Object.keys(user).length !== 0)
     sendData(`http://localhost:3000/api/v1/users`, user , 'POST')
-      .then(()=>{
+    .then(()=>{
+      setTimeout(()=>{
+        createMessage('Success','Your Account has been Created');
         document.getElementById('userName').value = '';
         document.getElementById('userEmail').value = '';
         password = document.getElementById('password').value = '';
         passwordConfirm = document.getElementById('passwordConfirm').value = '';
-        alert('Your Account has been Created');
-      })
-      .catch(err=>{
-        console.log(err);
-        alert('something went wrong. Please try again')
-      });
+        document.getElementById('messageContainer').remove();
+      },2000)
+    }).catch(err => {
+      setTimeout(()=>{
+        createMessage('fail','something went wrong. Check your info and try again')
+        document.getElementById('messageContainer').remove();
+      },2000)
+    })
 }
 
-// get Data form an API
-const getData = (url) => {
-  fetch(url)
-    .then((res) => {
-      return res.json();
-    })
-    .then((response) => {
-      return response.data;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-
-// SEND DATA TO API - method specifies the request (post or patch)
+// SEND DATA TO API without using AXIOS - method specifies the request (post or patch) 
 const sendData = async (url, data, method) => {
   try{
     const res = await fetch(url, {
@@ -61,8 +52,7 @@ const sendData = async (url, data, method) => {
     return res.json();
   }catch(err){
     console.log(err)
-    alert('something went wrong. Please try again')
   }
 };
 
-//singUpBtn.addEventListener('click', gatherUserData())
+singUp.addEventListener('submit', gatherUserData)
