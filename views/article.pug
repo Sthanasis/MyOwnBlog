@@ -9,6 +9,9 @@ block content
                 div
                     span=article.content
                 div.articleFooter
-                    span=article.author
-                    span
-                        a(href="/") Go Back
+                    div(style="display: flex; justify-content:space-between;")
+                        span=article.author
+                        span -
+                        span=article.date
+                    
+                    a.button(href="/") Go Back

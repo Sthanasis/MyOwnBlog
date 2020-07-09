@@ -1,8 +1,9 @@
 :root {
   --Light: #ffffff;
   --Dark: #000000;
-  --GreenDark: #011b02;
-  --GreenMedium: #006a08;
-  --GreenLight: #9cad89;
-  --MainText: bisque;
+  --GreenDark: #005073;
+  --GreenMedium: #53aeda;
+  --GreenMD: #189ad3;
+  --GreenLight: #f3f3f3;
+  --MainText: #f3f3f3;
 }

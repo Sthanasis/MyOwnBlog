@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please tell us your name!'],
     unique: true,
-    trim: true,
   },
   email: {
     type: String,
@@ -19,7 +18,7 @@ const userSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: '../public/img/main_avatar.svg',
+    default: 'user.svg',
   },
   password: {
     type: String,

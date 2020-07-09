@@ -11,14 +11,18 @@ const login = async (email, password) => {
     });
     console.log(res);
   } catch (err) {
-    console.log(err);
+    console.log(err.response.data);
   }
 };
+
 document
   .querySelector('form.container.flexColumn')
   .addEventListener('submit', (e) => {
     e.preventDefault();
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    login(email, password);
-  });
+    login(email, password)
+      .then(()=>{
+        document.querySelector('#logo a').click();
+      });
+});

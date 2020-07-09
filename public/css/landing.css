@@ -4,11 +4,15 @@ html {
 }
 body {
   margin: 0;
-  font-family: cursive;
+  font-family: 'Roboto';
   background: var(--GreenLight);
 }
 * {
   outline: none;
+}
+
+body * {
+  transition: all 0.1s linear;
 }
 
 main {
@@ -131,8 +135,8 @@ button a {
 } */
 
 .article {
-  background-color: var(--GreenMedium);
-  border-radius: 0.5em;
+  background-color: var(--GreenDark);
+  border-radius: 5px;
   padding: 1em;
   margin: 2em 0;
   text-align: center;
@@ -141,7 +145,7 @@ button a {
   flex-direction: column;
   /* width: fit-content;
   width: -moz-fit-content; */
-  box-shadow: 0px 1px 10px 5px var(--GreenDark);
+  /* box-shadow: 0px 1px 10px 5px var(--GreenDark); */
 }
 
 .articleHeader {
@@ -151,7 +155,7 @@ button a {
   margin-bottom: 1em;
   font-weight: bold;
   font-size: 1.2rem;
-  border-bottom: 1px dotted var(--MainText);
+  /* border-bottom: 1px dotted var(--MainText); */
 }
 
 .articleHeader span {
@@ -163,6 +167,14 @@ button a {
   justify-content: space-between;
   margin-top: 1em;
   font-style: italic;
+}
+
+.articleFooter a{
+  font-style: normal;
+}
+
+.articleFooter span{
+  margin: 0 .5em;
 }
 
 button.edit {
@@ -184,15 +196,15 @@ button.create {
 }
 
 .button {
-  background: var(--GreenLight);
+  background: var(--GreenMD);
   border-radius: 2em;
-  padding: 0 5px;
-  color: var(--GreenDark);
+  padding: 2px 10px;
+  color: var(--MainText);
 }
 
 .button:hover {
-  background: var(--GreenDark);
-  color: var(--GreenLight);
+  /* background: var(--GreenDark); */
+  color: var(--GreenDark);
 }
 
 .container {
@@ -241,6 +253,29 @@ button.create {
   width: fit-content;
   width: -moz-fit-content;
 }
+
+#signContainer{
+  display: flex;
+}
+
+.profileContainer{
+  display: flex;
+}
+
+.username{
+  color:var(--MainText);
+  font-weight: bold;
+  margin: auto 1em;
+}
+
+.profilePicture{
+  height: 2rem;
+  background: var(--MainText);
+  border-radius: 50%;
+  width: 2rem;
+}
+
+
 
 .footer {
   display: flex;
