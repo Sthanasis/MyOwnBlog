@@ -5,6 +5,7 @@ html
         meta(name='viewport' content='width=device-width, initial-scale=1.0')
         link(rel='stylesheet' href='/css/var.css')
         link(rel='stylesheet' href='/css/landing.css')
+        <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
         title My Own Blog 
     body
         include _header
@@ -13,5 +14,5 @@ html
 
         include _footer
         script(src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js")
-        script(type='text/javascript' src="main.js")
-        script(type='text/javascript' src="/javascript/login.js")
+        script(type='module' src="/javascript/signup.mjs")
+        script(type='module' src="/javascript/login.mjs")

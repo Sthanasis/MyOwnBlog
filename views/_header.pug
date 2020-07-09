@@ -4,5 +4,13 @@ header.header
             img(src='/img/blog-logo.svg' alt='MyOwnBlog logo')
             a(href='/') MyBlog
         div#signContainer
-            a.button(href="/login") Log In
-            a.button(href="/signup") Sign Up
+            if user
+                div.profileContainer
+                    img.profilePicture(src=`/img/users/${user.image}`)
+                    span.username=user.name
+                div
+                    a.button(href="#") Create Article
+                    a.button(href="#") Logout
+            else
+                a.button(href="/login") Log In
+                a.button(href="/signup") Sign Up

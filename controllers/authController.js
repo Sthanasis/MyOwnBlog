@@ -5,10 +5,33 @@ const AppError = require('../utilities/appError');
 const catchAsync = require('../utilities/catchAsync');
 
 const signToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+  return jwt.sign({ id }, "thisIsMyUltraSecureSecretItsAlsoLong", {
+    expiresIn: "90d",
   });
 };
+
+
+const createSendToken = (user,statusCode, res)=>{
+  const token = signToken(user._id);
+  const cookieOptions = {
+    // 90 has to go to config.env as JWT_COOKIE_EXPIRES_IN
+    expires: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000),
+    httpOnly: true
+  }
+  if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+  
+  res.cookie('jwt', token, cookieOptions )
+
+  user.password = undefined;
+
+  res.status(statusCode).json({
+    status:"success",
+    token,
+    data:{
+      user
+    }
+  })
+}
 
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
@@ -18,14 +41,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
 
-  const token = signToken(newUser._id);
-  res.status(201).json({
-    status: 'success',
-    token,
-    data: {
-      user: newUser,
-    },
-  });
+  createSendToken(newUser, 201, res)
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -45,11 +61,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   //3) if everything ok send the token to the client
-  const token = signToken(user._id);
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  createSendToken(user,201,res)
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -70,12 +82,33 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
   //2) validate token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  const decoded = await promisify(jwt.verify)(token, "thisIsMyUltraSecureSecretItsAlsoLong");
   //3) check if user still exists
-  const freshUser = User.findById(decoded.id);
+  const currentUser = User.findById(decoded.id);
 
-  if (!freshUser) {
+  if (!currentUser) {
     return next(new AppError('User does not exists', 401));
   }
+
+  req.user = currentUser;
+
+  next();
+});
+
+exports.isLoggedIn = catchAsync(async (req, res, next) => {
+  if (req.cookies.jwt) {
+    
+    const decoded = await promisify(jwt.verify)(req.cookies.jwt, "thisIsMyUltraSecureSecretItsAlsoLong");
+    const currentUser = await User.findById(decoded.id);
+    console.log(currentUser)
+    if (!currentUser) {
+      return next();
+    }
+
+    res.locals.user = currentUser;
+
+    return next();
+  }
+
   next();
 });
