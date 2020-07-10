@@ -8,17 +8,18 @@ const signUp = async (user) => {
     const res = await axios({
       method: 'POST',
       //dev
-      //url: 'http://localhost:3000/api/v1/users',
+      url: 'http://localhost:3000/api/v1/users',
       //prod
-      url: '/api/v1/users',
+      //url: '/api/v1/users',
       data: user,
     });
-    reateMessage('success', 'Registration was a success');
-    setTimeout(() => {
-      location.assign('/');
-    }, 1500);
-    // if (res.data.status === 'success') {
-    // }
+
+    if (res.data.status === 'success') {
+      reateMessage('success', 'Registration was a success');
+      setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
   } catch (err) {
     createMessage('fail', 'Failed to register!');
   }
