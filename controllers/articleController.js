@@ -24,13 +24,12 @@ exports.getArticle = catchAsync(async (req, res) => {
 });
 
 exports.createArticle = catchAsync(async (req, res) => {
-  const user = await User.findOne(req.params.name);
   const newArticle = await Article.create({
     title: req.body.title,
     content: req.body.content,
-    //author: user.name,
+    author: req.body.author,
   });
-  console.log(user);
+
   res.status(201).json({
     status: 'success',
     data: {

@@ -13,7 +13,7 @@ router
 router
   .route('/:id')
   .get(articleController.getArticle)
-  .patch(articleController.updateArticle)
+  .patch(authController.protect, articleController.updateArticle)
   .delete(authController.protect, articleController.deleteArticle);
 
 module.exports = router;
