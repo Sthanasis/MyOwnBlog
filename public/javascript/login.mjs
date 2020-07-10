@@ -6,7 +6,10 @@ const login = async (email, password) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/v1/users/login',
+      //dev
+      //url: 'http://localhost:3000/api/v1/users/login',
+      //prod
+      url: '/api/v1/users/login',
       data: {
         email,
         password,
@@ -19,10 +22,7 @@ const login = async (email, password) => {
         location.assign('/');
       }, 1500);
     }
-
-    console.log(res);
   } catch (err) {
-    console.log(err.response.data.message);
     createMessage(
       'failed',
       `Log in failed! Check if you provided the correct email and password!`
@@ -37,7 +37,10 @@ const logout = async () => {
   try {
     const res = await axios({
       method: 'GET',
-      url: 'http://localhost:3000/api/v1/users/logout',
+      //dev
+      //url: 'http://localhost:3000/api/v1/users/logout',
+      //prod
+      url: '/api/v1/users/logout',
     });
 
     if (res.data.status === 'success') location.assign('/');

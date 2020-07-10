@@ -6,7 +6,10 @@ const postArticle = async (data) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://localhost:3000/api/v1/articles',
+      //dev
+      //url: 'http://localhost:3000/api/v1/articles',
+      //prod
+      url: '/api/v1/articles',
       data,
     });
 
@@ -28,9 +31,12 @@ const patchArticle = async (data) => {
   try {
     const res = await axios({
       method: 'PATCH',
-      url: `http://localhost:3000/api/v1/articles/${
-        document.querySelector('.articleId').value
-      }`,
+      //dev
+      // url: `http://localhost:3000/api/v1/articles/${
+      //   document.querySelector('.articleId').value
+      // }`,
+      //prod
+      url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
       data,
     });
 
@@ -55,9 +61,13 @@ const deleteArticle = async () => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://localhost:3000/api/v1/articles/${
-        document.querySelector('.articleId').value
-      }`,
+      //dev
+      // url: `http://localhost:3000/api/v1/articles/${
+      //   document.querySelector('.articleId').value
+      // }`,
+
+      //prod
+      url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
     });
 
     if (res.status === 204) {
@@ -73,6 +83,7 @@ const deleteArticle = async () => {
 
 if (document.getElementById('deleteArticle')) {
   document.getElementById('deleteArticle').addEventListener('click', () => {
+    // eslint-disable-next-line no-alert
     const flag = confirm('Are you sure you want to delete this Article?');
     if (flag) deleteArticle();
   });

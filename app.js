@@ -2,6 +2,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
+const compression = require('compression');
 const userRouter = require('./routes/userRoutes');
 const articleRouter = require('./routes/articleRoutes');
 const viewRouter = require('./routes/viewRoutes');
@@ -14,9 +15,12 @@ app.set('views', path.join(__dirname, 'views'));
 // serving static files from public folder
 app.use(express.static(path.join(__dirname, 'public')));
 // Middlewares
+app.use(compression());
+
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
+
 //express.json middleware
 app.use(express.json());
 app.use(cookieParser());

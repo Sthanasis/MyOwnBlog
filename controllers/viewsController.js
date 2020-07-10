@@ -8,8 +8,7 @@ exports.getHome = catchAsync(async (req, res, next) => {
   //sort from newest to oldest
   articles.reverse();
 
-
-  // render template using article data 
+  // render template using article data
   res.status(200).render('home', {
     title: 'All Articles',
     articles,
@@ -41,18 +40,13 @@ exports.createArticle = (req, res) => {
 };
 
 exports.editArticle = catchAsync(async (req, res) => {
-
-  const article = await Article.findById({ _id:req.params.id});
-
-
-  console.log(article)
+  const article = await Article.findById({ _id: req.params.id });
 
   res.status(200).render('editArticle', {
     title: 'Edit Your Article',
-    article
+    article,
   });
 });
-
 
 exports.postSignupForm = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);

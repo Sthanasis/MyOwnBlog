@@ -9,7 +9,10 @@ const signUp = async (data) => {
   try {
     const res = await axios({
       method: 'POST',
-      url: '`http://localhost:3000/api/v1/users`',
+      //dev
+      //url: 'http://localhost:3000/api/v1/users',
+      //prod
+      url: '/api/v1/users',
       data,
     });
 
@@ -29,33 +32,6 @@ const signUp = async (data) => {
     }, 5000);
   }
 };
-
-// const sendData = async (url, data, method) => {
-//   try {
-//     const res = await fetch(url, {
-//       method: method,
-//       mode: 'cors',
-//       cache: 'no-cache',
-//       credentials: 'same-origin',
-//       headers: {
-//         'Content-Type': 'application/json',
-//       },
-//       redirect: 'follow',
-//       referrerPolicy: 'no-referrer',
-//       body: JSON.stringify(data),
-//     });
-//     document.getElementById('userName').value = '';
-//     document.getElementById('userEmail').value = '';
-//     password = document.getElementById('password').value = '';
-//     passwordConfirm = document.getElementById('passwordConfirm').value = '';
-//     document.getElementById('messageContainer').remove();
-//     createMessage('Success', 'Your Account has been Created');
-//     return res.json();
-//   } catch (err) {
-//     console.log(err);
-//     alert('Something went Wrong!!');
-//   }
-// };
 
 const gatherUserData = () => {
   const name = document.getElementById('userName').value;
