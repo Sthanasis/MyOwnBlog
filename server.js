@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
 dotenv.config({
-  path: './.config.env',
+  path: './config.env',
 });
 const app = require('./app');
 
@@ -24,7 +24,7 @@ mongoose
     console.log(err);
   });
 
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT;
 
 app.listen(port, () => {
   console.log(`Application is running on localhost:${port}`);
