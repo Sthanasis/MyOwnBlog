@@ -28,9 +28,12 @@ if (document.getElementById('create')) {
   document.getElementById('create').addEventListener('click', () => {
     const title = document.querySelector('input.title').value;
     const content = document.getElementById('articleContent').value;
+    const author = document.querySelector('.username').innerHTML;
+
     const data = {
       title,
       content,
+      author,
     };
 
     postArticle(data);
