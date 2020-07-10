@@ -14,6 +14,5 @@ router.get('/:id/editArticle', viewsController.editArticle);
 router.get('/login', viewsController.getLoginForm);
 
 router.get('/signup', viewsController.getSignupForm);
-router.post('/signup', viewsController.postSignupForm);
 
 module.exports = router;

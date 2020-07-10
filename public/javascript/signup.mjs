@@ -3,9 +3,7 @@
 /* eslint-disable no-undef */
 import { createMessage } from './message.mjs';
 
-const singUp = document.querySelector('form.gridContainer');
-
-const signUp = async (data) => {
+const signUp = async (user) => {
   try {
     const res = await axios({
       method: 'POST',
@@ -13,40 +11,35 @@ const signUp = async (data) => {
       //url: 'http://localhost:3000/api/v1/users',
       //prod
       url: '/api/v1/users',
-      data,
+      data: user,
     });
-
-    if (res.data.status === 'success') {
-      createMessage('success', 'Registration was successfull!');
-      setTimeout(() => {
-        location.assign('/');
-      }, 2000);
-    }
-  } catch (err) {
-    createMessage(
-      'failed',
-      `Registration Failed. Check your info and try again!`
-    );
+    reateMessage('success', 'Registration was a success');
     setTimeout(() => {
-      document.getElementById('messageContainer').remove();
-    }, 5000);
+      location.assign('/');
+    }, 1500);
+    // if (res.data.status === 'success') {
+    // }
+  } catch (err) {
+    createMessage('fail', 'Failed to register!');
   }
 };
 
-const gatherUserData = () => {
-  const name = document.getElementById('userName').value;
-  const email = document.getElementById('userEmail').value;
-  const password = document.getElementById('password').value;
-  const passwordConfirm = document.getElementById('passwordConfirm').value;
+if (document.querySelector('form.gridContainer')) {
+  document
+    .querySelector('form.gridContainer')
+    .addEventListener('submit', () => {
+      const name = document.getElementById('userName').value;
+      const email = document.getElementById('userEmail').value;
+      const password = document.getElementById('password').value;
+      const passwordConfirm = document.getElementById('passwordConfirm').value;
 
-  const user = {
-    name,
-    email,
-    password,
-    passwordConfirm,
-  };
+      const user = {
+        name,
+        email,
+        password,
+        passwordConfirm,
+      };
 
-  if (Object.keys(user).length !== 0) signUp(user);
-};
-
-singUp.addEventListener('submit', gatherUserData);
+      signUp(user);
+    });
+}

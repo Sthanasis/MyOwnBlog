@@ -1,5 +1,4 @@
 const Article = require('../models/articleModel');
-const User = require('../models/userModel');
 const catchAsync = require('../utilities/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
@@ -45,15 +44,5 @@ exports.editArticle = catchAsync(async (req, res) => {
   res.status(200).render('editArticle', {
     title: 'Edit Your Article',
     article,
-  });
-});
-
-exports.postSignupForm = catchAsync(async (req, res, next) => {
-  const newUser = await User.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: {
-      newUser,
-    },
   });
 });

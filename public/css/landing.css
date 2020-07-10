@@ -163,6 +163,13 @@ button a {
   white-space: break-spaces;
 }
 
+.articleContentContainer {
+  text-align: initial;
+  letter-spacing: 1px;
+  white-space: break-spaces;
+  line-height: 2em;
+}
+
 .articleFooter {
   display: flex;
   justify-content: space-between;
@@ -184,10 +191,15 @@ button a {
 
 .button.delete {
   background: var(--Failure);
+  cursor: pointer;
 }
 .button.create {
   background: var(--Success);
   padding: 0.5em 1em;
+}
+
+#userSignUp {
+  margin-right: 1em;
 }
 
 #formMain {
