@@ -2,9 +2,9 @@
 const createMessage = (operation, text) => {
   let color;
   if (operation !== 'success') {
-    color = '#EA5770';
+    color = 'var(--Failure)';
   } else {
-    color = '#49C487';
+    color = 'var(--Success)';
   }
   const container = document.createElement('div');
   const innerText = document.createTextNode(text);

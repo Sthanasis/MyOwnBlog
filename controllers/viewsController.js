@@ -3,13 +3,13 @@ const User = require('../models/userModel');
 const catchAsync = require('../utilities/catchAsync');
 
 exports.getHome = catchAsync(async (req, res, next) => {
-  //1) GET all articles from collection
+  // GET all articles from collection
   const articles = await Article.find();
   //sort from newest to oldest
   articles.reverse();
-  //2) build template
 
-  //3) render template using article data from step 1
+
+  // render template using article data 
   res.status(200).render('home', {
     title: 'All Articles',
     articles,
@@ -36,9 +36,23 @@ exports.getSignupForm = (req, res) => {
 
 exports.createArticle = (req, res) => {
   res.status(200).render('createNewArticle', {
-    title: 'Share your thoughts',
+    title: 'Share Your Thoughts',
   });
 };
+
+exports.editArticle = catchAsync(async (req, res) => {
+
+  const article = await Article.findById({ _id:req.params.id});
+
+
+  console.log(article)
+
+  res.status(200).render('editArticle', {
+    title: 'Edit Your Article',
+    article
+  });
+});
+
 
 exports.postSignupForm = catchAsync(async (req, res, next) => {
   const newUser = await User.create(req.body);

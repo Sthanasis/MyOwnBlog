@@ -130,9 +130,9 @@ button a {
   margin: auto;
 }
 
-/* .article:first-of-type {
-  margin-top: 10vh;
-} */
+.userOptions a {
+  margin: 0 0.5em;
+}
 
 .article {
   background-color: var(--GreenDark);
@@ -178,19 +178,18 @@ button a {
   margin: 0 0.5em;
 }
 
-button.edit {
-  background: #e8a41a;
-  border-radius: 1em;
+.button.edit {
+  background: var(--Edit);
 }
 
-button.delete {
-  background: #ea5770;
-  border-radius: 1em;
+.button.delete {
+  background: var(--Failure);
 }
-button.create {
-  background: #49c487;
-  border-radius: 1em;
+.button.create {
+  background: var(--Success);
+  padding: 0.5em 1em;
 }
+
 #formMain {
   display: flex;
   flex-direction: column-reverse;
@@ -256,7 +255,10 @@ button.create {
   width: fit-content;
   width: -moz-fit-content;
   display: flex;
-  margin: 1em auto;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   padding: 1em;
   color: var(--MainText);
 }
@@ -266,9 +268,14 @@ button.create {
   width: 20vw;
   justify-content: space-around;
 }
+
 .widthFitContent {
   width: fit-content;
   width: -moz-fit-content;
+}
+
+.container.widthFitContent .articleHeader {
+  display: block;
 }
 
 #signContainer {

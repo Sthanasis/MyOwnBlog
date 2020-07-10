@@ -7,15 +7,15 @@ block content
                 div.articleHeader
                     span=article.title
                 div
-                    span=article.content
+                    span.articleContent=article.content
                 div.articleFooter
                     div(style="display: flex; justify-content:space-between;")
                         span=article.author
-                        span -
                         span=article.date
                     if user
                         if user.name === article.author
-                            div.articleOptions
-                                a.button(href="#") Edit Article
-                                a.button(href="#") Delete Article
+                            div.userOptions
+                                a#editArticle.button.edit(href=`/${article._id}/editArticle`) Edit Article
+                                a#deleteArticle.button.delete Delete Article
+                                input.articleId(type="text" value=`${article._id}` style='display:none')
                     a.button(href="/") Go Back
