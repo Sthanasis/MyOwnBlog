@@ -1,4 +1,4 @@
 node_modules
 .prettierrc
 .bash_Profile.bash
-.config.env
+config.env
