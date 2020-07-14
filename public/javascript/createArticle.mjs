@@ -7,9 +7,9 @@ const postArticle = async (data) => {
     const res = await axios({
       method: 'POST',
       //dev
-      url: 'http://localhost:3000/api/v1/articles',
+      //url: 'http://localhost:3000/api/v1/articles',
       //prod
-      //url: '/api/v1/articles',
+      url: '/api/v1/articles',
       data,
     });
 
@@ -32,11 +32,11 @@ const patchArticle = async (data) => {
     const res = await axios({
       method: 'PATCH',
       //dev
-      url: `http://localhost:3000/api/v1/articles/${
-        document.querySelector('.articleId').value
-      }`,
+      // url: `http://localhost:3000/api/v1/articles/${
+      //   document.querySelector('.articleId').value
+      // }`,
       //prod
-      //url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
+      url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
       data,
     });
 
@@ -62,12 +62,12 @@ const deleteArticle = async () => {
     const res = await axios({
       method: 'DELETE',
       //dev
-      url: `http://localhost:3000/api/v1/articles/${
-        document.querySelector('.articleId').value
-      }`,
+      // url: `http://localhost:3000/api/v1/articles/${
+      //   document.querySelector('.articleId').value
+      // }`,
 
       //prod
-      //url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
+      url: `/api/v1/articles/${document.querySelector('.articleId').value}`,
     });
 
     if (res.status === 204) {

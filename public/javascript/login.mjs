@@ -7,9 +7,9 @@ const login = async (email, password) => {
     const res = await axios({
       method: 'POST',
       //dev
-      url: 'http://localhost:3000/api/v1/users/login',
+      //url: 'http://localhost:3000/api/v1/users/login',
       //prod
-      //url: '/api/v1/users/login',
+      url: '/api/v1/users/login',
       data: {
         email,
         password,
@@ -38,9 +38,9 @@ const logout = async () => {
     const res = await axios({
       method: 'GET',
       //dev
-      url: 'http://localhost:3000/api/v1/users/logout',
+      //url: 'http://localhost:3000/api/v1/users/logout',
       //prod
-      //url: '/api/v1/users/logout',
+      url: '/api/v1/users/logout',
     });
 
     if (res.data.status === 'success') location.assign('/');
