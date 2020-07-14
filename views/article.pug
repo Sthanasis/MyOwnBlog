@@ -15,7 +15,7 @@ block content
                     if user
                         if user.name === article.author
                             div.userOptions
-                                a#editArticle.button.edit(href=`/${article._id}/editArticle`) Edit Article
-                                a#deleteArticle.button.delete Delete Article
+                                a#editArticle.button.edit(href=`/${article._id}/editArticle`) Edit 
+                                a#deleteArticle.button.delete Delete 
                                 input.articleId(type="text" value=`${article._id}` style='display:none')
                     a.button(href="/") Go Back
